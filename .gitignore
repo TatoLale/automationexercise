@@ -1,0 +1,22 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# pytest
+.pytest_cache/
+
+# Secrets
+.env
+
+# Playwright output (screenshots, videos, traces)
+test-results/
+
+# Allure (for later)
+allure-results/
+allure-report/
+
+# Editor settings
+.vscode/
