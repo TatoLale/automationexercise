@@ -1,13 +1,19 @@
 import requests
+import allure
+
+from api.base_test import BaseApiTest
 
 
-def test_delete_method_to_delete_user_account(base_url, create_user):
-    response = requests.delete(
-        f"{base_url}/deleteAccount", data=create_user, timeout=10
-    )
+@allure.story("Account")
+class TestDeleteUserAccount(BaseApiTest):
+    @allure.title("API 12: Verify deleting user account")
+    def test_delete_method_to_delete_user_account(self, base_url, create_user):
+        response = requests.delete(
+            f"{base_url}/deleteAccount", data=create_user, timeout=10
+        )
 
-    data = response.json()
+        data = response.json()
 
-    assert response.status_code == 200
-    assert data["responseCode"] == 200
-    assert data["message"] == "Account deleted!"
+        assert response.status_code == 200
+        assert data["responseCode"] == 200
+        assert data["message"] == "Account deleted!"
