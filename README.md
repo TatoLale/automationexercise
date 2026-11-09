@@ -4,6 +4,8 @@ Test automation project for [automationexercise.com](https://automationexercise.
 
 The project covers the site's public API and its UI test cases, using Python, pytest, Requests and Playwright with the Page Object Model.
 
+[![Tests](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml/badge.svg)](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml)
+
 > **Status:** work in progress. All 14 API scenarios are automated; UI test cases are being added.
 
 ## Tech stack
@@ -14,11 +16,14 @@ The project covers the site's public API and its UI test cases, using Python, py
 - Playwright + pytest-playwright (UI tests)
 - python-dotenv (credentials)
 - pytest-xdist (parallel runs)
+- GitHub Actions (CI)
 
 ## Project structure
 
 ```
-AutomationExercise/
+automationexercise/
+├── .github/workflows/
+│   └── tests.yml                # CI pipeline
 ├── api/
 │   ├── tests/
 │   │   ├── api_1/ ... api_14/   # one folder per API scenario
@@ -57,15 +62,16 @@ All scenarios from the site's [API list](https://automationexercise.com/api_list
 ## Design notes
 
 - **Status codes:** this API always returns HTTP 200 and puts the real result code in the response body (`responseCode`). Tests assert both, so this behavior is documented in the tests.
-- **Test users:** account tests never depend on a shared account. Fixtures create a user with a unique email (via `uuid`) before the test and delete it afterwards, even if the test fails.
+- **Test users:** API 11–14 never depend on a shared account. Fixtures create a user with a unique email (via `uuid`) before the test and delete it afterwards, even if the test fails.
 - **Assertions:** messages are checked with exact matches (`==`), not substring checks.
-- **Credentials** are read from `.env`, which is not committed.
+- **Credentials** are read from `.env`, which is not committed. In CI they come from GitHub Secrets.
+- **CI:** all tests run automatically with GitHub Actions on every push to `main` and on every Pull Request.
 
 ## Setup
 
 ```bash
-git clone https://github.com/TatoLale/AutomationExercise.git
-cd AutomationExercise
+git clone https://github.com/TatoLale/automationexercise.git
+cd automationexercise
 
 python -m venv .venv
 .venv\Scripts\Activate.ps1        # Windows PowerShell

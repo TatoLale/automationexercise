@@ -14,7 +14,7 @@ __pycache__/
 # Playwright output (screenshots, videos, traces)
 test-results/
 
-# Allure (for later)
+# Allure
 allure-results/
 allure-report/
 
