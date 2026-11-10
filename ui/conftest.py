@@ -1,5 +1,8 @@
 import pytest
+import requests
 
+
+from config import BASE_URL_API
 from test_data import generate_user_data
 from ui.pages.home_page import HomePage
 from ui.pages.login_page import LoginPage
@@ -51,4 +54,10 @@ def registered_user(page, new_user):
     signup_page.click_continue_button()
     home_page.click_logout_button()
 
-    return new_user
+    yield new_user
+
+    requests.delete(
+        f"{BASE_URL_API}/deleteAccount",
+        data={"email": new_user["email"], "password": new_user["password"]},
+        timeout=10,
+    )
