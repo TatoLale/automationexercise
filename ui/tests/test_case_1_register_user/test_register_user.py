@@ -8,6 +8,7 @@ from ui.base_test import BaseUITest
 
 @allure.story("Register")
 class TestRegisterUser(BaseUITest):
+    @allure.severity(allure.severity_level.CRITICAL)
     @allure.title("Test Case 1: Register user")
     def test_register_user(self, page, new_user):
         home_page = HomePage(page)
@@ -73,5 +74,3 @@ class TestRegisterUser(BaseUITest):
             "Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button"
         ):
             home_page.account_delete_confirmation_is_visible()
-
-        page.wait_for_timeout(3000)

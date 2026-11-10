@@ -12,6 +12,7 @@ class HomePage:
         self.logged_in_as = page.get_by_text("Logged in as")
         self.delete_account_button = page.get_by_role("link", name="Delete Account")
         self.delete_account_text = page.get_by_text("Account Deleted!")
+        self.logout_button = page.get_by_role("link", name="Logout")
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -30,3 +31,6 @@ class HomePage:
 
     def account_delete_confirmation_is_visible(self):
         expect(self.delete_account_text).to_be_visible()
+
+    def click_logout_button(self):
+        self.logout_button.click()

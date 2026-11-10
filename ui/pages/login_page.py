@@ -11,6 +11,10 @@ class LoginPage:
         self.input_name = page.get_by_placeholder("Name")
         self.input_email = page.locator('[data-qa="signup-email"]')
         self.signup_button = page.get_by_role("button", name="Signup")
+        self.login_to_your_account = page.get_by_text("Login to your account")
+        self.input_registered_email = page.locator('[data-qa="login-email"]')
+        self.input_registered_password = page.get_by_placeholder("Password")
+        self.login_button = page.get_by_role("button", name="Login")
 
     def open(self):
         self.page.goto(f"{BASE_URL_UI}/login")
@@ -24,3 +28,13 @@ class LoginPage:
 
     def click_signup_button(self):
         self.signup_button.click()
+
+    def login_message_is_visible(self):
+        expect(self.login_to_your_account).to_be_visible()
+
+    def fill_email_and_password_fields(self, email, password):
+        self.input_registered_email.fill(email)
+        self.input_registered_password.fill(password)
+
+    def click_login_button(self):
+        self.login_button.click()
