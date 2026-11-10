@@ -10,9 +10,10 @@ class TestAllBrandsList(BaseApiTest):
     def test_get_all_brands_list(self, base_url):
         response = requests.get(f"{base_url}/brandsList", timeout=10)
 
+        assert response.status_code == 200
+
         data = response.json()
 
-        assert response.status_code == 200
         assert data["responseCode"] == 200
         assert len(data["brands"]) > 0
 
