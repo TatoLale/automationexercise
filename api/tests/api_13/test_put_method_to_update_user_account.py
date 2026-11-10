@@ -14,9 +14,10 @@ class TestUpdateUserAccount(BaseApiTest):
             f"{base_url}/updateAccount", data=update_user, timeout=10
         )
 
+        assert response.status_code == 200
+
         data = response.json()
 
-        assert response.status_code == 200
         assert data["responseCode"] == 200
         assert data["message"] == "User updated!"
 
@@ -25,6 +26,8 @@ class TestUpdateUserAccount(BaseApiTest):
             params={"email": update_user["email"]},
             timeout=10,
         )
+
+        assert get_response.status_code == 200
 
         get_data = get_response.json()
 
