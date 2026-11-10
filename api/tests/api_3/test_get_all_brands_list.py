@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Brands")
 class TestAllBrandsList(BaseApiTest):
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.title("API 3: Get all brands list")
     def test_get_all_brands_list(self, base_url):
         response = requests.get(f"{base_url}/brandsList", timeout=10)

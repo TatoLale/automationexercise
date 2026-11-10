@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Brands")
 class TestPutAllBrandsList(BaseApiTest):
+    @allure.severity(allure.severity_level.MINOR)
     @allure.title("API 4: PUT to brands list is not supported")
     def test_put_to_all_brands_list(self, base_url):
         response = requests.put(f"{base_url}/brandsList", timeout=10)
