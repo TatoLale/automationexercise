@@ -44,3 +44,6 @@ class LoginPage:
 
     def incorrect_login_text_is_visible(self):
         expect(self.incorrect_login_text).to_be_visible()
+
+    def login_page_is_open(self):
+        expect(self.page).to_have_url(f"{BASE_URL_UI}/login")
