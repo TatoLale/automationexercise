@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Account")
 class TestUpdateUserAccount(BaseApiTest):
+    @allure.severity(allure.severity_level.CRITICAL)
     @allure.title("API 13: Verify updating user account")
     def test_put_method_to_update_user_account(self, base_url, update_user):
         update_user["name"] = "TestUpdateName"

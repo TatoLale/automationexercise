@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Account")
 class TestAccountDetailByEmail(BaseApiTest):
+    @allure.severity(allure.severity_level.CRITICAL)
     @allure.title("API 14: Verify to get account detail by email")
     def test_get_user_account_detail_by_email(self, base_url, update_user):
         response = requests.get(

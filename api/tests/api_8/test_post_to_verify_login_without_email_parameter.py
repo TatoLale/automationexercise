@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Login")
 class TestLoginWithoutEmail(BaseApiTest):
+    @allure.severity(allure.severity_level.MINOR)
     @allure.title("API 8: Verify login without email parameter")
     def test_post_to_verify_login_without_email_parameter(
         self, base_url, login_credentials

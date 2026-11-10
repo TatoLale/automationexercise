@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Products")
 class TestSearchProductWithoutParameter(BaseApiTest):
+    @allure.severity(allure.severity_level.MINOR)
     @allure.title("API 6: Search product without search_product parameter")
     def test_post_to_search_product_without_search_product_parameter(self, base_url):
         response = requests.post(f"{base_url}/searchProduct", timeout=10)

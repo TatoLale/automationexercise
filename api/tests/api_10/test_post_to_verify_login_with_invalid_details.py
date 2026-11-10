@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Login")
 class TestLoginWithInvalidDetails(BaseApiTest):
+    @allure.severity(allure.severity_level.MINOR)
     @allure.title("API 10: Verify login with invalid details")
     def test_post_to_verify_login_with_invalid_details(
         self, base_url, login_credentials

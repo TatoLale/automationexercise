@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Account")
 class TestRegisterUser(BaseApiTest):
+    @allure.severity(allure.severity_level.CRITICAL)
     @allure.title("API 11: Create/Register user account")
     def test_post_to_create_register_user_account(self, base_url, delete_user):
         response = requests.post(

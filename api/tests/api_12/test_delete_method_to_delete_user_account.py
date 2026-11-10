@@ -6,6 +6,7 @@ from api.base_test import BaseApiTest
 
 @allure.story("Account")
 class TestDeleteUserAccount(BaseApiTest):
+    @allure.severity(allure.severity_level.CRITICAL)
     @allure.title("API 12: Verify deleting user account")
     def test_delete_method_to_delete_user_account(self, base_url, create_user):
         response = requests.delete(
