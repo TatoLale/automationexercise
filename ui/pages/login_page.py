@@ -15,6 +15,9 @@ class LoginPage:
         self.input_registered_email = page.locator('[data-qa="login-email"]')
         self.input_registered_password = page.get_by_placeholder("Password")
         self.login_button = page.get_by_role("button", name="Login")
+        self.incorrect_login_text = page.get_by_text(
+            "Your email or password is incorrect!"
+        )
 
     def open(self):
         self.page.goto(f"{BASE_URL_UI}/login")
@@ -38,3 +41,6 @@ class LoginPage:
 
     def click_login_button(self):
         self.login_button.click()
+
+    def incorrect_login_text_is_visible(self):
+        expect(self.incorrect_login_text).to_be_visible()
