@@ -2,7 +2,7 @@ import pytest
 import requests
 
 from config import BASE_URL_API, EMAIL, PASSWORD
-from api.test_data import generate_user_data
+from test_data import generate_user_data
 
 
 @pytest.fixture
