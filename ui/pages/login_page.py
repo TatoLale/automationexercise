@@ -18,6 +18,7 @@ class LoginPage:
         self.incorrect_login_text = page.get_by_text(
             "Your email or password is incorrect!"
         )
+        self.email_already_exists_text = page.get_by_text("Email Address already exist!")
 
     def open(self):
         self.page.goto(f"{BASE_URL_UI}/login")
@@ -47,3 +48,6 @@ class LoginPage:
 
     def login_page_is_open(self):
         expect(self.page).to_have_url(f"{BASE_URL_UI}/login")
+
+    def email_already_exist_text_is_visible(self):
+        expect(self.email_already_exists_text).to_be_visible()
