@@ -8,6 +8,13 @@ from ui.pages.home_page import HomePage
 from ui.pages.login_page import LoginPage
 from ui.pages.signup_page import SignUpPage
 
+AD_DOMAINS = (
+    "googlesyndication.com",
+    "doubleclick.net",
+    "googleadservices.com",
+    "adservice.google.com",
+)
+
 
 @pytest.fixture
 def new_user():
@@ -61,3 +68,14 @@ def registered_user(page, new_user):
         data={"email": new_user["email"], "password": new_user["password"]},
         timeout=10,
     )
+
+
+@pytest.fixture(autouse=True)
+def block_ads(page):
+    def handle_route(route):
+        if any(domain in route.request.url for domain in AD_DOMAINS):
+            route.abort()
+        else:
+            route.continue_()
+
+    page.route("**/*", handle_route)
