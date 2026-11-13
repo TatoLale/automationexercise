@@ -14,6 +14,9 @@ class HomePage:
         self.delete_account_text = page.get_by_text("Account Deleted!")
         self.logout_button = page.get_by_role("link", name="Logout")
         self.contact_us_link = page.get_by_role("link", name="Contact us")
+        self.test_cases_link = page.locator("#header").get_by_role(
+            "link", name="Test Cases"
+        )
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -38,3 +41,6 @@ class HomePage:
 
     def click_contact_us_link(self):
         self.contact_us_link.click()
+
+    def click_test_cases_link(self):
+        self.test_cases_link.click()
