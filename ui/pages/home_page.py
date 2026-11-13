@@ -17,6 +17,9 @@ class HomePage:
         self.test_cases_link = page.locator("#header").get_by_role(
             "link", name="Test Cases"
         )
+        self.products_link = page.locator("#header").get_by_role(
+            "link", name="Products"
+        )
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -44,3 +47,6 @@ class HomePage:
 
     def click_test_cases_link(self):
         self.test_cases_link.click()
+
+    def click_products_link(self):
+        self.products_link.click()
