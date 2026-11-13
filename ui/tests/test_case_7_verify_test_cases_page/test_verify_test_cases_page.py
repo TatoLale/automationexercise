@@ -5,7 +5,7 @@ from ui.pages.test_cases_page import CasesPage
 from ui.base_test import BaseUITest
 
 
-@allure.story("Contact Us")
+@allure.story("Test Case")
 class TestVerifyTestCasesPage(BaseUITest):
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title("Test Case 7: Verify Test Cases Page")
