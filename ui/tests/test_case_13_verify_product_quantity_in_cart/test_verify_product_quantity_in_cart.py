@@ -34,5 +34,3 @@ class TestProductQuantity(BaseUITest):
             "Verify that product is displayed in cart page with exact quantity"
         ):
             view_cart_page.product_quantity_is(position=0, quantity=4)
-
-        page.wait_for_timeout(3000)
