@@ -20,6 +20,11 @@ class HomePage:
         self.products_link = page.locator("#header").get_by_role(
             "link", name="Products"
         )
+        self.footer = page.locator("#footer")
+        self.subscription_text = page.get_by_text("Subscription")
+        self.subscription_email_input = page.locator("#susbscribe_email")
+        self.subscription_button = page.locator("#subscribe")
+        self.subscription_successful_text = page.get_by_text("You have been successfully subscribed!")
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -50,3 +55,18 @@ class HomePage:
 
     def click_products_link(self):
         self.products_link.click()
+
+    def scroll_down_to_footer(self):
+        self.footer.scroll_into_view_if_needed()
+
+    def subscription_text_is_visible(self):
+        expect(self.subscription_text).to_be_visible()
+
+    def fill_subscription_email(self, email):
+        self.subscription_email_input.fill(email)
+
+    def click_subscribe_button(self):
+        self.subscription_button.click()
+
+    def subscription_successful_text_is_visible(self):
+        expect(self.subscription_successful_text).to_be_visible()
