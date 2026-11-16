@@ -32,6 +32,8 @@ class ProductsPage:
             "button", name="Continue Shopping"
         )
         self.view_cart_link = page.get_by_role("link", name="View Cart")
+        self.quantity_input = page.locator("#quantity")
+        self.add_to_cart_button = page.get_by_role("button", name="Add to cart")
 
     def all_products_page_is_open(self):
         expect(self.page).to_have_url(f"{BASE_URL_UI}/products")
@@ -94,3 +96,9 @@ class ProductsPage:
 
     def get_product_price(self, index):
         return self.product_cards.nth(index).locator(".productinfo h2").inner_text()
+
+    def fill_quantity_input(self, number):
+        self.quantity_input.fill(number)
+
+    def click_add_to_cart_button(self):
+        self.add_to_cart_button.click()

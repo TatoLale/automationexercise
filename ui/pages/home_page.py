@@ -21,6 +21,7 @@ class HomePage:
             "link", name="Products"
         )
         self.cart_link = page.locator("#header").get_by_role("link", name="Cart")
+        self.view_product_link = page.get_by_role("link", name="View Product").first
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -54,3 +55,6 @@ class HomePage:
 
     def click_cart_link(self):
         self.cart_link.click()
+
+    def click_view_product_link(self):
+        self.view_product_link.click()
