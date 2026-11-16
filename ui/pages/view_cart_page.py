@@ -22,3 +22,9 @@ class ViewCartPage:
             expect(row.locator(".cart_price p")).to_have_text(price)
             expect(row.locator(".cart_quantity button")).to_have_text(str(quantity))
             expect(row.locator(".cart_total p")).to_have_text(f"Rs. {expected_total}")
+
+    def product_quantity_is(self, position, quantity):
+        expect(
+            self.cart_rows.nth(position)
+            .locator(".cart_quantity button")
+        ).to_have_text(str(quantity))
