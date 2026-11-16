@@ -28,6 +28,10 @@ class ProductsPage:
         self.searched_products_text = page.get_by_role(
             "heading", name="Searched Products"
         )
+        self.continue_shopping_button = page.get_by_role(
+            "button", name="Continue Shopping"
+        )
+        self.view_cart_link = page.get_by_role("link", name="View Cart")
 
     def all_products_page_is_open(self):
         expect(self.page).to_have_url(f"{BASE_URL_UI}/products")
@@ -68,3 +72,25 @@ class ProductsPage:
             expect(card.locator(".productinfo p")).to_contain_text(
                 self.search_term, ignore_case=True
             )
+
+    def hover_on_product(self, index):
+        card = self.product_cards.nth(index)
+        card.scroll_into_view_if_needed()
+        card.hover()
+
+    def click_add_to_cart_overlay(self, index):
+        self.product_cards.nth(index).locator(".product-overlay").get_by_text(
+            "Add to cart"
+        ).click()
+
+    def click_continue_shopping_button(self):
+        self.continue_shopping_button.click()
+
+    def click_view_cart_link(self):
+        self.view_cart_link.click()
+
+    def get_product_name(self, index):
+        return self.product_cards.nth(index).locator(".productinfo p").inner_text()
+
+    def get_product_price(self, index):
+        return self.product_cards.nth(index).locator(".productinfo h2").inner_text()
