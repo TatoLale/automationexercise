@@ -39,4 +39,5 @@ class ProductDetailPage(BasePage):
         self.quantity_input.fill(number)
 
     def click_add_to_cart_button(self):
+        self.page.wait_for_load_state("load")
         self.add_to_cart_button.click()
