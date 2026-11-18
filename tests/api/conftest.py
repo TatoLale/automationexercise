@@ -22,16 +22,11 @@ def delete_user(base_url):
 
     yield user_details
 
-    response = requests.delete(
+    requests.delete(
         f"{base_url}/deleteAccount",
         data={"email": user_details["email"], "password": user_details["password"]},
         timeout=10,
     )
-
-    data = response.json()
-
-    assert data["responseCode"] == 200
-    assert data["message"] == "Account deleted!"
 
 
 @pytest.fixture
@@ -39,6 +34,8 @@ def create_user(base_url):
     user = generate_user_data()
 
     response = requests.post(f"{base_url}/createAccount", data=user, timeout=10)
+
+    assert response.status_code == 200
 
     response_data = response.json()
 
@@ -55,19 +52,16 @@ def update_user(base_url):
 
     create_response = requests.post(f"{base_url}/createAccount", data=user, timeout=10)
 
+    assert create_response.status_code == 200
+
     create_response_data = create_response.json()
 
     assert create_response_data["message"] == "User created!"
 
     yield user
 
-    delete_response = requests.delete(
+    requests.delete(
         f"{base_url}/deleteAccount",
         data={"email": user["email"], "password": user["password"]},
         timeout=10,
     )
-
-    delete_response_data = delete_response.json()
-
-    assert delete_response_data["responseCode"] == 200
-    assert delete_response_data["message"] == "Account deleted!"

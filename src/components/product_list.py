@@ -13,10 +13,14 @@ class ProductList:
         expect(self.product_cards.first).to_be_visible()
 
     def get_product_name(self, index):
-        return self.product_cards.nth(index).locator(".productinfo p").inner_text()
+        name = self.product_cards.nth(index).locator(".productinfo p")
+        expect(name).to_be_visible()
+        return name.inner_text()
 
     def get_product_price(self, index):
-        return self.product_cards.nth(index).locator(".productinfo h2").inner_text()
+        price = self.product_cards.nth(index).locator(".productinfo h2")
+        expect(price).to_be_visible()
+        return price.inner_text()
 
     def hover_on_product(self, index):
         card = self.product_cards.nth(index)
