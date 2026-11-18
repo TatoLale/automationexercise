@@ -4,7 +4,7 @@ Test automation project for [automationexercise.com](https://automationexercise.
 
 The project covers the site's public API and its UI test cases, using Python, pytest, Requests and Playwright with the Page Object Model.
 
-[![Tests](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml/badge.svg)](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml)
+[![Tests](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml)
 
 > **Status:** work in progress. All 14 API scenarios are automated; UI test cases are being added (1–13 of 26 done so far).
 > The project changes often, so parts of this README may be out of date.
