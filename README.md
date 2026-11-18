@@ -6,7 +6,8 @@ The project covers the site's public API and its UI test cases, using Python, py
 
 [![Tests](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml/badge.svg)](https://github.com/TatoLale/automationexercise/actions/workflows/tests.yml)
 
-> **Status:** work in progress. All 14 API scenarios are automated; UI test cases are being added.
+> **Status:** work in progress. All 14 API scenarios are automated; UI test cases are being added (1–13 of 26 done so far).
+> The project changes often, so parts of this README may be out of date.
 
 ## Tech stack
 
@@ -16,6 +17,8 @@ The project covers the site's public API and its UI test cases, using Python, py
 - Playwright + pytest-playwright (UI tests)
 - python-dotenv (credentials)
 - pytest-xdist (parallel runs)
+- pytest-rerunfailures (retries when the site is overloaded)
+- Allure (reports)
 - GitHub Actions (CI)
 
 ## Project structure
@@ -23,19 +26,45 @@ The project covers the site's public API and its UI test cases, using Python, py
 ```
 automationexercise/
 ├── .github/workflows/
-│   └── tests.yml                # CI pipeline
-├── api/
-│   ├── tests/
-│   │   ├── api_1/ ... api_14/   # one folder per API scenario
-│   ├── conftest.py              # fixtures: base URL, credentials, test users
-│   └── test_data.py             # generates unique user data
-├── ui/
-│   ├── pages/                   # page objects
-│   └── tests/                   # UI tests, one folder per test case
-├── config.py                    # base URLs, reads credentials from .env
-├── .env.example                 # template for local credentials
+│   └── tests.yml                 # CI pipeline + Allure report on GitHub Pages
+├── src/
+│   ├── components/               # parts shared by many pages
+│   │   ├── header.py             # top menu
+│   │   ├── footer.py             # footer + subscription
+│   │   ├── product_list.py       # product cards grid
+│   │   └── cart_modal.py         # "Added!" popup
+│   ├── pages/                    # page objects, all inherit BasePage
+│   │   ├── base_page.py          # gives every page .header and .footer
+│   │   └── ...                   # home, login, signup, products, cart, ...
+│   ├── config.py                 # base URLs, reads credentials from .env
+│   └── test_data.py              # generates unique user data
+├── tests/
+│   ├── api/
+│   │   ├── api_1/ ... api_14/    # one folder per API scenario
+│   │   └── conftest.py           # fixtures: base URL, credentials, test users
+│   └── ui/
+│       ├── test_case_1_.../      # one folder per UI test case
+│       ├── test_files/           # files for upload tests
+│       └── conftest.py           # fixtures: test users, ad blocking
+├── .env.example                  # template for local credentials
 ├── pytest.ini
 └── requirements.txt
+```
+
+### Page Object Model with components
+
+Every page object inherits `BasePage`, so the header menu and footer are available on any page:
+
+```python
+home_page.header.click_products_link()
+cart_page.footer.fill_subscription_email_input(email)
+```
+
+Blocks that appear on several pages (product grid, cart popup) are components attached to the pages that have them:
+
+```python
+products_page.products.hover_on_product(index=0)
+products_page.cart_modal.click_view_cart_link()
 ```
 
 ## API coverage
@@ -91,7 +120,14 @@ AUTOMATIONEXERCISE_PASSWORD=
 ## Running tests
 
 ```bash
-pytest api -v                  # API tests
-pytest ui -v --headed          # UI tests, with a visible browser
+pytest tests/api -v            # API tests
+pytest tests/ui -v --headed    # UI tests, with a visible browser
 pytest -n 4                    # everything, in 4 parallel workers
+```
+
+### Allure report
+
+```bash
+pytest
+allure serve allure-results
 ```
