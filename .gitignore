@@ -20,3 +20,5 @@ allure-report/
 
 # Editor settings
 .vscode/
+
+test-results/
