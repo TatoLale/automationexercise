@@ -28,6 +28,7 @@ class ProductList:
         card.hover()
 
     def click_add_to_cart_overlay(self, index):
+        self.page.wait_for_load_state("load")
         self.product_cards.nth(index).locator(".product-overlay").get_by_text(
             "Add to cart"
         ).click()

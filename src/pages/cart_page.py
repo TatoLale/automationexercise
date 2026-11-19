@@ -1,32 +1,25 @@
 from playwright.sync_api import expect
 
 from src.pages.base_page import BasePage
+from src.components.order_table import OrderTable
+from src.config import BASE_URL_UI
 
 
 class CartPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
 
-        self.cart_rows = page.locator("#cart_info_table tbody tr")
+        self.order_table = OrderTable(page)
+        self.proceed_to_checkout_button = page.get_by_text("Proceed To Checkout")
+        self.register_login_link = page.locator("#checkoutModal").get_by_role(
+            "link", name="Register / Login"
+        )
 
-    def products_are_in_cart(self, names):
-        expect(self.cart_rows).to_have_count(len(names))
-        for position, name in enumerate(names):
-            expect(
-                self.cart_rows.nth(position).locator(".cart_description h4")
-            ).to_have_text(name)
+    def cart_page_is_open(self):
+        expect(self.page).to_have_url(f"{BASE_URL_UI}/view_cart")
 
-    def products_prices_quantities_and_totals_are_correct(self, prices, quantities):
-        for position, (price, quantity) in enumerate(zip(prices, quantities)):
-            row = self.cart_rows.nth(position)
-            expected_total = int(price.replace("Rs. ", "")) * quantity
+    def click_proceed_to_checkout_button(self):
+        self.proceed_to_checkout_button.click()
 
-            expect(row.locator(".cart_price p")).to_have_text(price)
-            expect(row.locator(".cart_quantity button")).to_have_text(str(quantity))
-            expect(row.locator(".cart_total p")).to_have_text(f"Rs. {expected_total}")
-
-    def product_quantity_is(self, position, quantity):
-        expect(
-            self.cart_rows.nth(position)
-            .locator(".cart_quantity button")
-        ).to_have_text(str(quantity))
+    def click_register_login_link(self):
+        self.register_login_link.click()

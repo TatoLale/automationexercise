@@ -36,6 +36,8 @@ class LoginPage(BasePage):
         expect(self.new_user_signup).to_be_visible()
 
     def fill_name_and_email_fields(self, name, email):
+        expect(self.input_name).to_be_visible()
+        expect(self.input_email).to_be_visible()
         self.input_name.fill(name)
         self.input_email.fill(email)
 
