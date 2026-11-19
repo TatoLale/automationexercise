@@ -107,12 +107,14 @@ class TestPlaceOrderRegisterWhileCheckout(BaseUITest):
             )
         with allure.step("Click 'Pay and Confirm Order' button"):
             payment_page.click_pay_and_confirm_button()
+        # The success message only flashes on /payment before the redirect,
+        # so the order is verified on the 'Order Placed!' confirmation page instead.
         with allure.step(
             "Verify success message 'Your order has been placed successfully!'"
         ):
             order_placed_page.order_placed_text_is_visible()
         with allure.step("Click 'Delete Account' button"):
-            payment_page.header.click_delete_account_link()
+            order_placed_page.header.click_delete_account_link()
 
         with allure.step("Verify 'ACCOUNT DELETED!' and click 'Continue' button"):
             account_deleted_page.account_deleted_text_is_visible()
