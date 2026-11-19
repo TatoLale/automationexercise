@@ -33,4 +33,4 @@ class TestProductQuantity(BaseUITest):
         with allure.step(
             "Verify that product is displayed in cart page with exact quantity"
         ):
-            cart_page.product_quantity_is(position=0, quantity=4)
+            cart_page.order_table.product_quantity_is(position=0, quantity=4)

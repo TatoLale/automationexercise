@@ -37,10 +37,10 @@ class TestAddProducts(BaseUITest):
         with allure.step("Click 'View Cart' button"):
             products_page.cart_modal.click_view_cart_link()
         with allure.step("Verify both products are added to Cart"):
-            cart_page.products_are_in_cart(
+            cart_page.order_table.products_are_in_cart(
                 [first_product_name, second_product_name]
             )
         with allure.step("Verify their prices, quantity and total price"):
-            cart_page.products_prices_quantities_and_totals_are_correct(
+            cart_page.order_table.products_prices_quantities_and_totals_are_correct(
                 prices=[first_product_price, second_product_price], quantities=[1, 1]
             )

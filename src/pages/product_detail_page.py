@@ -36,6 +36,7 @@ class ProductDetailPage(BasePage):
         expect(self.product_brand).to_be_visible()
 
     def fill_quantity_input(self, number):
+        expect(self.quantity_input).to_be_visible()
         self.quantity_input.fill(number)
 
     def click_add_to_cart_button(self):
