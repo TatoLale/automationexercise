@@ -2,6 +2,7 @@ from playwright.sync_api import expect
 
 from src.components.cart_modal import CartModal
 from src.components.product_list import ProductList
+from src.components.sidebar import Sidebar
 from src.config import BASE_URL_UI
 from src.pages.base_page import BasePage
 
@@ -11,6 +12,7 @@ class HomePage(BasePage):
         super().__init__(page)
         self.products = ProductList(page)
         self.cart_modal = CartModal(page)
+        self.sidebar = Sidebar(page)
 
     def open(self):
         self.page.goto(BASE_URL_UI)
