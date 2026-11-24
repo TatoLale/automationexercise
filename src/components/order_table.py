@@ -29,3 +29,7 @@ class OrderTable:
         expect(
             self.product_rows.nth(position).locator(".cart_quantity button")
         ).to_have_text(str(quantity))
+
+    def click_product_x_button(self, position):
+        self.page.wait_for_load_state("load")
+        self.product_rows.nth(position).locator(".cart_quantity_delete").click()
