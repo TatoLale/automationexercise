@@ -13,7 +13,9 @@ class LoginPage(BasePage):
         self.input_name = page.get_by_placeholder("Name")
         self.input_email = page.locator('[data-qa="signup-email"]')
         self.signup_button = page.get_by_role("button", name="Signup")
-        self.email_already_exists_text = page.get_by_text("Email Address already exist!")
+        self.email_already_exists_text = page.get_by_text(
+            "Email Address already exist!"
+        )
 
         # LOGIN FORM
         self.login_to_your_account = page.get_by_text("Login to your account")
@@ -53,6 +55,8 @@ class LoginPage(BasePage):
         expect(self.login_to_your_account).to_be_visible()
 
     def fill_email_and_password_fields(self, email, password):
+        expect(self.input_registered_email).to_be_visible()
+        expect(self.input_registered_password).to_be_visible()
         self.input_registered_email.fill(email)
         self.input_registered_password.fill(password)
 
