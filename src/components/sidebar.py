@@ -6,6 +6,7 @@ class Sidebar:
         self.page = page
 
         self.category_sidebar = page.locator("#accordian")
+        self.brand_sidebar = page.locator(".brands_products")
 
     def category_sidebar_is_visible(self):
         expect(self.category_sidebar).to_be_visible()
@@ -18,3 +19,9 @@ class Sidebar:
         self.category_sidebar.locator(f"#{category}").get_by_role(
             "link", name=name, exact=True
         ).click()
+
+    def brand_sidebar_is_visible(self):
+        expect(self.brand_sidebar).to_be_visible()
+
+    def click_brand(self, name):
+        self.brand_sidebar.locator(f"a[href='/brand_products/{name}']").click()
