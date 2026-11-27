@@ -17,6 +17,10 @@ class HomePage(BasePage):
         self.recommended_cards = page.locator(
             ".recommended_items .item.active .product-image-wrapper"
         )
+        self.scroll_up_arrow = page.locator("#scrollUp")
+        self.full_fledged_text = page.locator(
+            "#slider-carousel .item.active"
+        ).get_by_text("Full-Fledged practice website for Automation Engineers")
 
     def open(self):
         self.page.goto(BASE_URL_UI)
@@ -35,3 +39,9 @@ class HomePage(BasePage):
     def add_recommended_product_to_cart(self, index):
         self.page.wait_for_load_state("load")
         self.recommended_cards.nth(index).locator(".add-to-cart").click()
+
+    def click_scroll_up_arrow(self):
+        self.scroll_up_arrow.click()
+
+    def full_fledged_text_is_in_viewport(self):
+        expect(self.full_fledged_text).to_be_in_viewport()

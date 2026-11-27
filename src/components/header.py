@@ -16,6 +16,9 @@ class Header:
         self.contact_us_link = self.header.get_by_role("link", name="Contact us")
         self.logged_in_as = self.header.get_by_text("Logged in as")
 
+    def scroll_up_to_header(self):
+        self.header.scroll_into_view_if_needed()
+
     def click_home_link(self):
         self.home_link.click()
 
