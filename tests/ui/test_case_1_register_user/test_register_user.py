@@ -39,6 +39,7 @@ class TestRegisterUser(BaseUITest):
             signup_page.enter_account_information_is_visible()
         with allure.step("Fill details: Title, Name, Email, Password, Date of birth"):
             signup_page.fill_account_information(
+                title=new_user["title"],
                 password=new_user["password"],
                 days=new_user["birth_date"],
                 months=new_user["birth_month"],

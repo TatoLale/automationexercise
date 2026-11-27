@@ -54,25 +54,7 @@ class TestPlaceOrderRegisterWhileCheckout(BaseUITest):
             )
             login_page.click_signup_button()
 
-            signup_page.fill_account_information(
-                password=new_user["password"],
-                days=new_user["birth_date"],
-                months=new_user["birth_month"],
-                years=new_user["birth_year"],
-            )
-            signup_page.fill_address_information(
-                first_name=new_user["firstname"],
-                last_name=new_user["lastname"],
-                company=new_user["company"],
-                address_1=new_user["address1"],
-                address_2=new_user["address2"],
-                country=new_user["country"],
-                state=new_user["state"],
-                city=new_user["city"],
-                zipcode=new_user["zipcode"],
-                mobile_number=new_user["mobile_number"],
-            )
-            signup_page.click_create_account_button()
+            signup_page.create_account(user=new_user)
 
         with allure.step("Verify 'ACCOUNT CREATED!' and click 'Continue' button"):
             account_created_page.account_created_text_is_visible()

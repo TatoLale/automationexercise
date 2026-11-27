@@ -12,7 +12,6 @@ class SignUpPage(BasePage):
         self.enter_account_information_text = page.get_by_text(
             "Enter Account Information"
         )
-        self.gender_choose_mr = page.locator("#id_gender1")
         self.input_password = page.locator("#password")
         self.date_of_birth_days = page.locator("#days")
         self.date_of_birth_months = page.locator("#months")
@@ -39,8 +38,8 @@ class SignUpPage(BasePage):
     def enter_account_information_is_visible(self):
         expect(self.enter_account_information_text).to_be_visible()
 
-    def fill_account_information(self, password, days, months, years):
-        self.gender_choose_mr.check()
+    def fill_account_information(self, title, password, days, months, years):
+        self.page.locator(f"input[name='title'][value='{title}']").check()
         self.input_password.fill(password)
         self.date_of_birth_days.select_option(days)
         self.date_of_birth_months.select_option(months)
@@ -80,3 +79,25 @@ class SignUpPage(BasePage):
 
     def click_create_account_button(self):
         self.create_account_button.click()
+
+    def create_account(self, user):
+        self.fill_account_information(
+            title=user["title"],
+            password=user["password"],
+            days=user["birth_date"],
+            months=user["birth_month"],
+            years=user["birth_year"],
+        )
+        self.fill_address_information(
+            first_name=user["firstname"],
+            last_name=user["lastname"],
+            company=user["company"],
+            address_1=user["address1"],
+            address_2=user["address2"],
+            country=user["country"],
+            state=user["state"],
+            city=user["city"],
+            zipcode=user["zipcode"],
+            mobile_number=user["mobile_number"],
+        )
+        self.click_create_account_button()

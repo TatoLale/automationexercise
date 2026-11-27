@@ -19,6 +19,7 @@ class CartPage(BasePage):
         expect(self.page).to_have_url(f"{BASE_URL_UI}/view_cart")
 
     def click_proceed_to_checkout_button(self):
+        self.page.wait_for_load_state("load")
         self.proceed_to_checkout_button.click()
 
     def click_register_login_link(self):
