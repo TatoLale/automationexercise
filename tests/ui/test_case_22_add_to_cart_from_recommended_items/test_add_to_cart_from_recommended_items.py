@@ -5,7 +5,7 @@ from src.pages.cart_page import CartPage
 from tests.ui.base_test import BaseUITest
 
 
-@allure.story("Products")
+@allure.story("Cart")
 class TestAddToCartFromRecommendedItems(BaseUITest):
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title("Test Case 22: Add to cart from Recommended items")

@@ -10,10 +10,11 @@ class CheckoutPage(BasePage):
 
         self.order_table = OrderTable(page)
         self.delivery_address = page.locator("#address_delivery")
+        self.billing_address = page.locator("#address_invoice")
         self.comment_textarea = page.locator("#ordermsg textarea")
         self.place_order_link = page.get_by_role("link", name="Place Order")
 
-    def delivery_address_is_correct(self, user):
+    def _address_is_correct(self, address_block, user):
         for value in [
             user["firstname"],
             user["lastname"],
@@ -26,7 +27,13 @@ class CheckoutPage(BasePage):
             user["country"],
             user["mobile_number"],
         ]:
-            expect(self.delivery_address).to_contain_text(value)
+            expect(address_block).to_contain_text(value)
+
+    def delivery_address_is_correct(self, user):
+        self._address_is_correct(self.delivery_address, user)
+
+    def billing_address_is_correct(self, user):
+        self._address_is_correct(self.billing_address, user)
 
     def fill_comment_textarea(self, comment):
         self.comment_textarea.fill(comment)
